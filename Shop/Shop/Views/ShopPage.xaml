@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             x:Name="shopPage"
+             mc:Ignorable="d"
+             x:Class="Shop.Views.ShopPage">
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="Transparent" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+            <StackLayout  Margin="20,10,0,0" IsVisible="{Binding IsNotLoggedIn}" Orientation="Horizontal">
+                <Button Command="{Binding Source={x:Reference shopPage}, Path=BindingContext.LoginCommand}" BackgroundColor="LightGray" CornerRadius="50" BorderColor="Transparent" TextColor="Black" Text="Login"></Button>
+                <Button Command="{Binding Source={x:Reference shopPage}, Path=BindingContext.RegisterCommand}" BackgroundColor="LightGray" CornerRadius="50" BorderColor="Transparent" TextColor="Black" Text="Register"></Button>
+            </StackLayout>
+            <cv:CarouselViewControl x:Name="cvBanners" ShowIndicators="true" IndicatorsShape="Circle" IndicatorsTintColor="LightGray"
+                                    CurrentPageIndicatorTintColor="Red" Orientation="Horizontal" InterPageSpacing="0" 
+                                    HeightRequest="270" ItemsSource="{Binding Banners}" HorizontalOptions="FillAndExpand" 
+                                    VerticalOptions="StartAndExpand" AnimateTransition="True">
+                <cv:CarouselViewControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand"/>
+                            <Image Source="overlay.png" Aspect="Fill" HorizontalOptions="FillAndExpand"/>
+                            <StackLayout Margin="30,20,0,0" Spacing="15" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                <Label Text="{Binding Heading}" TextColor="White" FontSize="12" FontFamily="{StaticResource ThinFont}"/>
+                                <BoxView BackgroundColor="White" HorizontalOptions="Start" VerticalOptions="Start" HeightRequest="1" WidthRequest="50"/>
+                                <StackLayout>
+                                    <Label Text="{Binding Message}" TextColor="White" FontSize="35" FontFamily="{StaticResource PlayfairBold}"/>
+                                    <Label Text="{Binding Caption}" TextColor="White" FontSize="12" FontFamily="{StaticResource LightFont}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </cv:CarouselViewControl.ItemTemplate>
+            </cv:CarouselViewControl>
+        </StackLayout>
+        <!--<StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="End" Margin="30,20">
+            --><!--//TODO: Add login and register buttons --><!--
+        </StackLayout>-->
+        <ScrollView Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid RowSpacing="30" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid RowSpacing="20" Margin="30,0,0,30"  HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Collections" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}"/>
+                    <Frame BackgroundColor="Transparent">
+                        <Label Text="Show all" TextColor="Black" FontSize="14" VerticalOptions="Center" Opacity="0.5" HorizontalOptions="End"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference shopPage}, Path=BindingContext.CollectionCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <ScrollView Orientation="Horizontal" Grid.Row="1" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+                        <StackLayout BindableLayout.ItemsSource="{Binding CollectionsList}" Orientation="Horizontal" Spacing="20" VerticalOptions="Start">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame>
+                                        <StackLayout VerticalOptions="Start">
+                                            <Frame Padding="0" HasShadow="False"  HorizontalOptions="Start" VerticalOptions="Start" CornerRadius="10" HeightRequest="150" WidthRequest="150">
+                                                <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                            </Frame>
+                                            <Label Text="{Binding Name}" TextColor="Black" FontSize="15" />
+                                            <Label Text="{Binding Price,StringFormat='TND {0}'}" Margin="0,-7,0,0" TextColor="#62153B" FontSize="12" FontFamily="{StaticResource BoldFont}"/>
+                                        </StackLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference shopPage}, Path=BindingContext.ItemTapCommand}" CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+                <Grid Grid.Row="1" RowSpacing="20" Margin="30,0,0,30" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="New Trends" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}"/>
+                    <ScrollView Orientation="Horizontal" Grid.Row="1" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding TrendsList}" Spacing="15" VerticalOptions="Start">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame>
+                                        <StackLayout VerticalOptions="Start">
+                                            <Frame Padding="0" HasShadow="False"  HorizontalOptions="Start" VerticalOptions="Start" CornerRadius="10" HeightRequest="150" WidthRequest="150">
+                                                <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                            </Frame>
+                                            <Label Text="{Binding Name}" TextColor="Black" FontSize="15" />
+                                            <Label Text="{Binding Price,StringFormat='TND {0}'}" Margin="0,-7,0,0" TextColor="#62153B" FontSize="12" FontFamily="{StaticResource BoldFont}"/>
+                                        </StackLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference shopPage}, Path=BindingContext.ItemTapCommand}" CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Shop.Views.Cart"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="White"
+    x:Name="cartPage"
+    mc:Ignorable="d">
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout Margin="20,20,20,0">
+                <CollectionView x:Name="collectionView" ItemsSource="{Binding OrderItems}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem
+                                            BackgroundColor="#FF3D00"
+                                            Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}"
+                                            CommandParameter="{Binding}"
+                                            Text="Delete" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <!--  Content  -->
+                                <StackLayout>
+                                    <Frame
+                                        Margin="0,8,0,8"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        HasShadow="True">
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Margin="0,0,15,0">
+                                                <Image
+                                                    Aspect="AspectFit"
+                                                    HeightRequest="120"
+                                                    Source="{Binding Product.Image}"
+                                                    WidthRequest="120" />
+                                            </StackLayout>
+
+                                            <StackLayout Margin="15,0,0,0">
+
+                                                <Label
+                                                    FontSize="16"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding Product.Name,Mode=TwoWay}"
+                                                    TextColor="Black">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+
+                                                <Label
+                                                    FontSize="16"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding Product.Price,StringFormat= 'TND {0}'}"
+                                                    TextColor="#00C569">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+
+                                                <Label
+                                                                FontSize="16"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Text="{Binding Quantity,Mode=TwoWay}"
+                                                                TextColor="Black"
+                                                                VerticalTextAlignment="Center">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                                <Label
+                                                                FontSize="16"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Text="{Binding Size,Mode=TwoWay}"
+                                                                TextColor="Black">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String">
+                                                                <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
+                                                    <Frame
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        Margin="3,0,0,0"
+                                                        Padding="0"
+                                                        CornerRadius="40"
+                                                        BackgroundColor="{Binding Color,Mode=TwoWay}"
+                                                        HasShadow="False"
+                                                        HeightRequest="30"
+                                                        WidthRequest="30"
+                                                >
+                                                    </Frame>
+                                                </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </SwipeView>
+
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+
+                </CollectionView>
+            </StackLayout>
+
+
+            <StackLayout>
+                <!--  Footer_checkOut  -->
+                <StackLayout
+                    Margin="0,-5,0,0"
+                    BackgroundColor="White"
+                    HeightRequest="80"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="EndAndExpand">
+                    <BoxView
+                        Margin="0"
+                        BackgroundColor="#F7F7F7"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="CenterAndExpand" />
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        HasShadow="True"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <StackLayout
+                            Margin="0,0,0,10"
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
+                            <StackLayout>
+                                <Label
+                                    Margin="30,0,35,0"
+                                    FontSize="12"
+                                    HorizontalOptions="Center"
+                                    Text="PRICE"
+                                    TextColor="#929292"
+                                    VerticalOptions="CenterAndExpand"
+                                    VerticalTextAlignment="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+
+                                <Label
+                                    Margin="30,0,35,0"
+                                    FontSize="18"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Total,Mode=TwoWay,StringFormat= 'TND {0}'}"
+                                    TextColor="#00C569"
+                                    VerticalOptions="CenterAndExpand"
+                                    VerticalTextAlignment="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+
+                            </StackLayout>
+
+
+                            <Frame
+                                Margin="0,0,30,0"
+                                Padding="0"
+                                BackgroundColor="LimeGreen"
+                                CornerRadius="5"
+                                HasShadow="False"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="CenterAndExpand">
+                                <Label
+                                    Margin="35,15,35,15"
+                                    FontSize="14"
+                                    HorizontalOptions="Center"
+                                    Text="CHECKOUT"
+                                    TextColor="White"
+                                    VerticalTextAlignment="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CheckoutCommand}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

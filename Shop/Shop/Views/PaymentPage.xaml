@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="paymentPage"
+             x:Class="Shop.Views.PaymentPage">
+    <Grid>
+        <Grid BackgroundColor="LightGray" Grid.Row="0" Margin="0,0,0,60">
+            <StackLayout>
+                <Frame BackgroundColor="pink" CornerRadius="20" Margin="20" WidthRequest="200" HeightRequest="250">
+                    <StackLayout WidthRequest="250" HeightRequest="250" Margin="20">
+                        <Label Text="VISA" TextColor="White" FontSize="Title" FontAttributes="Bold"></Label>
+                        <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                                <Label Text="****" TextColor="White" FontAttributes="Bold" FontSize="Large" Margin="10,0"></Label>
+                                <Label Text="****" TextColor="White" FontAttributes="Bold" FontSize="Large" Margin="10,0"></Label>
+                                <Label Text="****" TextColor="White" FontAttributes="Bold" FontSize="Large" Margin="10,0"></Label>
+                            </StackLayout>
+                            <Label Text="5860" TextColor="White" FontAttributes="Bold" FontSize="Large" Margin="0,20"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+        <Grid Grid.Row="1" Margin="20,-60">
+            <StackLayout Orientation="Vertical" Margin="20,20" HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                        <Label Text="NAME" TextColor="DeepPink"></Label>
+                        <Label Text="{Binding FullName}" TextTransform="Uppercase"></Label>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="CARD-ID" TextColor="DeepPink"></Label>
+                        <Label Text="VISA-Chase"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,0,0,20" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                        <Label Text="CARD NUMBER" TextColor="DeepPink"></Label>
+                        <Label Text="**** **** **** 5860"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                        <Label Text="EXPIRATION DATE" TextColor="DeepPink"></Label>
+                        <Label Text="11/21"></Label>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Margin="45,0">
+                        <Label Text="CVV" TextColor="DeepPink"></Label>
+                        <Label Text="***"></Label>
+                    </StackLayout>
+
+                </StackLayout>
+                <Button Command="{Binding Source={x:Reference paymentPage},Path=BindingContext.DeliveryCommand}" Text="PAY" Margin="10" TextColor="White" CornerRadius="20" BackgroundColor="#013243"></Button>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

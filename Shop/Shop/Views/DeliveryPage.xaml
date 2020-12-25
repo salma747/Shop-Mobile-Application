@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Shop.Views.DeliveryPage">
+
+    <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Margin="5" Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                <RadioButton  GroupName="delivery"  CheckedChanged="RadioButton_CheckedChanged" ></RadioButton>
+                <Image Margin="50,0,0,0" HorizontalOptions="Center" Source="homeDelivery.jpg" HeightRequest="180" WidthRequest="180" Aspect="AspectFit"/>
+            </StackLayout>
+            <StackLayout Margin="5" Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                <RadioButton  GroupName="delivery" CheckedChanged="RadioButton_CheckedChanged" ></RadioButton>
+                <Image Margin="50,0,0,0" HorizontalOptions="Center" Source="fastDelivery.png" HeightRequest="150" WidthRequest="150"  Aspect="AspectFit"/>
+            </StackLayout>
+            <StackLayout Margin="5" Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                <RadioButton  GroupName="delivery" CheckedChanged="RadioButton_CheckedChanged"  ></RadioButton>
+                <Image Margin="50,0,0,0" HorizontalOptions="Center" Source="ShopDelivery.jpg" HeightRequest="150" WidthRequest="150" Aspect="AspectFit"/>
+            </StackLayout>
+        </StackLayout>
+        <Button Clicked="Button_Clicked" Text="CONFIRM" Margin="10" TextColor="White" CornerRadius="20" BackgroundColor="#013243"></Button>
+    </StackLayout>
+</ContentPage>

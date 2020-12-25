@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Shop.Views.CategoriesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="catPage"
+    BackgroundColor="White"
+    mc:Ignorable="d">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="15,15,15,0">
+                <!--  Nav Bar  -->
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        HasShadow="False"
+                        HeightRequest="40"
+                        WidthRequest="40">
+                        <Image
+                            Margin="0,10,0,10"
+                            Aspect="AspectFit"
+                            HeightRequest="12"
+                            HorizontalOptions="StartAndExpand"
+                            Source="shape"
+                            WidthRequest="6" />
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Label
+                        x:Name="title"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Gadgets"
+                        TextColor="Black"
+                        VerticalTextAlignment="Center">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="SFPro.ttf#Bold" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                </StackLayout>
+
+                <ScrollView>
+                    <StackLayout Margin="0,20,0,10">
+                        <!--  Item Listings  -->
+                        <StackLayout>
+                            <CollectionView  ItemsSource="{Binding Products}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid
+                                            Margin="5"
+                                            Padding="0"
+                                            WidthRequest="150"
+                                            >
+
+                                            <StackLayout>
+                                                <StackLayout>
+                                                    <Frame
+                                                        CornerRadius="5"
+                                                        HasShadow="False"
+                                                        HorizontalOptions="Center"
+                                                        IsClippedToBounds="True">
+                                                        <Image
+                                                            Aspect="AspectFit"
+                                                            HeightRequest="240"
+                                                            Source="{Binding Image}"
+                                                            WidthRequest="165" />
+                                                    </Frame>
+                                                </StackLayout>
+
+                                                <StackLayout Margin="0,-10,0,0">
+                                                    <Label
+                                                        FontSize="16"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Name}"
+                                                        TextColor="Black"
+                                                        VerticalOptions="Start">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String">
+                                                                <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
+
+                                                    <Label
+                                                        FontSize="16"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Price,StringFormat= 'TND {0}'}"
+                                                        TextColor="#00C569"
+                                                        VerticalOptions="Start">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String">
+                                                                <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference catPage}, Path=BindingContext.ItemTapCommand}" CommandParameter="{Binding .}" />
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

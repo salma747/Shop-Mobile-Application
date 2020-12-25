@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             mc:Ignorable="d" Title="My Commands"
+             x:Class="Shop.Views.MyCommandPage">
+
+    <ContentView ControlTemplate="{StaticResource GeneralTemplate}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView>
+            <StackLayout BindableLayout.ItemsSource="{Binding Orders}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Margin="20">
+                                <Label Text="{Binding ID}" FontAttributes="Bold" />
+                                <Label Text="{Binding OrderDate,StringFormat='{0:d/M/yyyy - HH:mm}'}"  FontAttributes="Bold"/>
+                                <Label Text="{Binding TotalPrice,StringFormat='Total : TND {0}'}" FontAttributes="Bold" />
+                            </StackLayout>
+                            <StackLayout Margin="20,20,20,0">
+                                <StackLayout x:Name="collectionView" BindableLayout.ItemsSource="{Binding OrderItems}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame HasShadow="True">
+
+                                                <!--  Content  -->
+                                                <StackLayout>
+                                                    <Frame
+                                        Margin="0,8,0,8"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        HasShadow="True">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <StackLayout Margin="0,0,15,0">
+                                                                <Image
+                                                    Aspect="AspectFit"
+                                                    HeightRequest="120"
+                                                    Source="{Binding Product.Image}"
+                                                    WidthRequest="120" />
+                                                            </StackLayout>
+
+                                                            <StackLayout Margin="15,0,0,0">
+
+                                                                <Label
+                                                    FontSize="16"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding Product.Name,Mode=TwoWay}"
+                                                    TextColor="Black">
+                                                                    <Label.FontFamily>
+                                                                        <OnPlatform x:TypeArguments="x:String">
+                                                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                                        </OnPlatform>
+                                                                    </Label.FontFamily>
+                                                                </Label>
+
+                                                                <Label
+                                                    FontSize="16"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding Product.Price,StringFormat= 'TND {0}'}"
+                                                    TextColor="#00C569">
+                                                                    <Label.FontFamily>
+                                                                        <OnPlatform x:TypeArguments="x:String">
+                                                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                                        </OnPlatform>
+                                                                    </Label.FontFamily>
+                                                                </Label>
+
+                                                                <Label
+                                                                FontSize="16"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Text="{Binding Quantity,Mode=TwoWay}"
+                                                                TextColor="Black"
+                                                                VerticalTextAlignment="Center">
+                                                                    <Label.FontFamily>
+                                                                        <OnPlatform x:TypeArguments="x:String">
+                                                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                                        </OnPlatform>
+                                                                    </Label.FontFamily>
+                                                                </Label>
+                                                                <Label
+                                                                FontSize="16"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Text="{Binding Size,Mode=TwoWay}"
+                                                                TextColor="Black">
+                                                                    <Label.FontFamily>
+                                                                        <OnPlatform x:TypeArguments="x:String">
+                                                                            <On Platform="Android" Value="SFPro.ttf#Bold" />
+                                                                        </OnPlatform>
+                                                                    </Label.FontFamily>
+                                                                </Label>
+                                                                <Frame
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        Margin="3,0,0,0"
+                                                        Padding="0"
+                                                        CornerRadius="40"
+                                                        BackgroundColor="{Binding Color,Mode=TwoWay}"
+                                                        HasShadow="False"
+                                                        HeightRequest="30"
+                                                        WidthRequest="30"
+                                                >
+                                                                </Frame>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </Frame>
+
+
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+
+
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentView>
+</ContentPage>
